@@ -42,6 +42,9 @@ TBD
 
 * [Tauri](https://tauri.app/)
 * [Vite](https://vitejs.dev/)
+* [Tailwind CSS](https://tailwindcss.com/)
+* [DaisyUI](https://daisyui.com/)
+* [Font Awesome](https://fontawesome.com/)
 
 ## Contributors
 
