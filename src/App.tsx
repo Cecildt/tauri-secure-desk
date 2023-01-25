@@ -1,15 +1,17 @@
 import { useEffect } from "react";
 import "./App.css";
-import { ThemeSwitcher } from "./components/theme-switcher";
 import { DashboardStats } from "./components/dashboard-stats";
+import { NavBar } from "./components/navbar";
+import { ContentTabs } from "./components/content-tabs";
 
 function App() {
   return (
-    <div className="App">
-      <ThemeSwitcher />
+    <div className="flex flex-col w-full">
+      <NavBar />
+      <div className="divider"></div>
       <DashboardStats />
-      <h1 className="text-3xl font-bold underline">Hello Secure Desk!</h1>
-      <button className="btn btn-primary">Button</button>
+      <div className="divider"></div>
+      <ContentTabs />
     </div>
   );
 }
