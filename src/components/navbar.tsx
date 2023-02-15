@@ -35,10 +35,13 @@ export function NavBar() {
               <a href="os">OS Updates</a>
             </li>
             <li>
+              <a href="system">System Info</a>
+            </li>
+            <li>
               <a href="about">About</a>
             </li>
             <li>
-              <a href="error">Error</a>
+              <a href="error">Error view</a>
             </li>
           </ul>
         </div>
