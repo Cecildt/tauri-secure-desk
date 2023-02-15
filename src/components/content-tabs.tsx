@@ -24,11 +24,11 @@ export function ContentTabs(): JSX.Element {
         content: <AppsTable />,
       });
 
-      console.log("Applications Updates clicked");
-      invoke("get_software_command").then((softwareList) => {
-        console.log(softwareList);
-      });
-      console.log("Applications Updates done");
+      // console.log("Applications Updates clicked");
+      // invoke("get_software_command").then((softwareList) => {
+      //   console.log(softwareList);
+      // });
+      // console.log("Applications Updates done");
     } else if (e.target.textContent === "OS Updates") {
       setState({
         content: <div>OS Updates</div>,

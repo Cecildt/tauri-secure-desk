@@ -1,16 +1,38 @@
-import { useEffect } from "react";
-import { DashboardStats } from "../components/dashboard-stats";
+import { useLoaderData } from "react-router-dom";
 import { NavBar } from "../components/navbar";
-import { ContentTabs } from "../components/content-tabs";
+import { Application } from "../services/applications-data";
 
-function Applications() {
+export default function Applications() {
+  const applications = useLoaderData() as Application[];
+
   return (
     <div className="flex flex-col w-full">
       <NavBar />
       <div className="divider"></div>
-      <p>Applications</p>
+      <div className="overflow-x-auto">
+        <table className="table w-full">
+          <thead>
+            <tr>
+              <th></th>
+              <th>Name</th>
+              <th>Version</th>
+              <th>Publisher</th>
+              <th>Installed Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            {applications.map((app, index) => (
+              <tr>
+                <th>{index + 1}</th>
+                <td>{app.name}</td>
+                <td>{app.version}</td>
+                <td>{app.publisher}</td>
+                <td>{app.installDate}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }
-
-export default Applications;

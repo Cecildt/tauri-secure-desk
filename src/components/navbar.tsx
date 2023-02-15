@@ -37,6 +37,9 @@ export function NavBar() {
             <li>
               <a href="about">About</a>
             </li>
+            <li>
+              <a href="error">Error</a>
+            </li>
           </ul>
         </div>
       </div>

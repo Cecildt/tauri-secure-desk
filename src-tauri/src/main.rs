@@ -43,9 +43,9 @@ fn main() {
 #[tauri::command]
 fn get_software_command() -> Vec<Application> {
     let softwareList = windows_get_installed_software_regedit();
-    println!("get_software_command:");
-    windows_get_installed_software_wmi();
-    println!("get_software_command: done");
+    // println!("get_software_command:");
+    // windows_get_installed_software_wmi();
+    // println!("get_software_command: done");
 
     softwareList
 
@@ -125,6 +125,8 @@ fn windows_get_installed_software_regedit() -> Vec<Application> {
 
         software.push(app);
     }
+
+    software.sort_by(|a, b| a.name.cmp(&b.name));
 
     println!("software: {:#?}", software);
     software

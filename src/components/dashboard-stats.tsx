@@ -1,4 +1,10 @@
-export function DashboardStats() {
+export interface DashboardStatsProps {
+  appsCount: number;
+  appsUpdates: number;
+  osUpdates: number;
+}
+
+export function DashboardStats(props: DashboardStatsProps) {
   return (
     <div className="stats shadow">
       <div className="stat">
@@ -18,7 +24,7 @@ export function DashboardStats() {
           </svg>
         </div>
         <div className="stat-title">Applications</div>
-        <div className="stat-value">15</div>
+        <div className="stat-value">{props.appsCount}</div>
         <div className="stat-desc">Installed</div>
       </div>
 
@@ -39,7 +45,7 @@ export function DashboardStats() {
           </svg>
         </div>
         <div className="stat-title">Apps Updates</div>
-        <div className="stat-value">5</div>
+        <div className="stat-value">{props.appsUpdates}</div>
         <div className="stat-desc">Last check: 12 January 2023</div>
       </div>
 
@@ -60,7 +66,7 @@ export function DashboardStats() {
           </svg>
         </div>
         <div className="stat-title">OS Updates</div>
-        <div className="stat-value">3</div>
+        <div className="stat-value">{props.osUpdates}</div>
         <div className="stat-desc">Missing updates</div>
       </div>
     </div>
