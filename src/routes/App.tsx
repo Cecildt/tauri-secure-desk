@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 import "./App.css";
-import { DashboardStats } from "./components/dashboard-stats";
-import { NavBar } from "./components/navbar";
-import { ContentTabs } from "./components/content-tabs";
+import { DashboardStats } from "../components/dashboard-stats";
+import { NavBar } from "../components/navbar";
+import { ContentTabs } from "../components/content-tabs";
 
 function App() {
   return (

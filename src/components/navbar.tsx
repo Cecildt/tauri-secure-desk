@@ -26,16 +26,16 @@ export function NavBar() {
             className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
           >
             <li>
-              <a>Dashboard</a>
+              <a href="/">Dashboard</a>
             </li>
             <li>
-              <a>Applications</a>
+              <a href="/apps">Applications</a>
             </li>
             <li>
-              <a>OS Updates</a>
+              <a href="os">OS Updates</a>
             </li>
             <li>
-              <a>About</a>
+              <a href="about">About</a>
             </li>
           </ul>
         </div>

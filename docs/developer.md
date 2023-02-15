@@ -9,9 +9,14 @@ To get started with the development of the Secure Desk application, you need to 
 
 ## Detailed documentation
 
-TODO
+To start the development of the Secure Desk application, you need to follow the following steps:
+
+```bash
+npm install
+cargo tauri dev
+```
 
 ## Further reading
 
-* [Tauri documentation](https://tauri.studio/en/docs/getting-started/intro)
+* [Tauri documentation](https://tauri.app/v1/guides/getting-started/prerequisites)
 * [Vite documentation](https://vitejs.dev/guide/)
