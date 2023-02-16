@@ -12,7 +12,7 @@ export default function ErrorPage() {
             <h1 className="text-5xl font-bold">Oops!</h1>
             <p className="py-4">Sorry, an unexpected error has occurred.</p>
             <div className="my-5">
-              <span className="link-error">
+              <span className="text-red-600">
                 {error.statusText || error.message}
               </span>
             </div>

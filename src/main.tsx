@@ -9,6 +9,8 @@ import OperatingSystem from "./routes/OperatingSystem";
 import About from "./routes/About";
 import { getApplications } from "./services/applications-data";
 import { getDashboardData } from "./services/dashboard-data";
+import { getOS } from "./services/os-data";
+import System from "./routes/System";
 
 const router = createBrowserRouter([
   {
@@ -27,6 +29,13 @@ const router = createBrowserRouter([
     path: "os",
     element: <OperatingSystem />,
     errorElement: <ErrorPage />,
+    loader: getOS,
+  },
+  {
+    path: "system",
+    element: <System />,
+    errorElement: <ErrorPage />,
+    loader: getOS,
   },
   {
     path: "about",

@@ -4,26 +4,11 @@
 )]
 #![allow(non_camel_case_types)]
 #![allow(non_snake_case)]
-use futures::executor::block_on;
+use powershell_script::PsScriptBuilder;
 use serde::Deserialize;
 use serde::Serialize;
-use std::collections::HashMap;
-use std::process::Command;
-use winreg::enums::*;
+use winreg::enums::HKEY_LOCAL_MACHINE;
 use winreg::RegKey;
-use wmi::WMIError;
-use wmi::{COMLibrary, Variant, WMIConnection, WMIDateTime};
-
-#[derive(Deserialize, Debug)]
-struct Win32_OperatingSystem {
-    Caption: String,
-    Name: String,
-    CurrentTimeZone: i16,
-    Debug: bool,
-    EncryptionLevel: u32,
-    ForegroundApplicationBoost: u8,
-    LastBootUpTime: WMIDateTime,
-}
 
 #[derive(Deserialize, Serialize, Debug)]
 struct Application {
@@ -33,9 +18,26 @@ struct Application {
     installDate: String,
 }
 
+#[derive(Deserialize, Serialize, Debug)]
+struct OSInfo {
+    OsName: String,
+    WindowsVersion: String,
+    WindowsEditionId: String,
+    WindowsBuildLabEx: String,
+    WindowsInstallationType: String,
+    WindowsCurrentVersion: String,
+    OSDisplayVersion: String,
+    OsArchitecture: String,
+    CsDomain: String,
+}
+
 fn main() {
     tauri::Builder::default()
-        .invoke_handler(tauri::generate_handler![get_software_command])
+        .invoke_handler(tauri::generate_handler![
+            get_software_command,
+            get_os_info_command
+        ])
+        // .invoke_handler(tauri::generate_handler![get_os_info_command])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }
@@ -43,23 +45,8 @@ fn main() {
 #[tauri::command]
 fn get_software_command() -> Vec<Application> {
     let softwareList = windows_get_installed_software_regedit();
-    // println!("get_software_command:");
-    // windows_get_installed_software_wmi();
-    // println!("get_software_command: done");
 
     softwareList
-
-    // let output = Command::new("wmic")
-    //     .args(&["cpu", "get", "Name,NumberOfLogicalProcessors", "/format:list"]).output().ok().unwrap();
-
-    // let output = Command::new("wmic")
-    //         .args(&["Product",
-    //             "get",
-    //             "InstallDate,Name,Vendor,Version",
-    //             "/format:list"]).output().ok().unwrap();
-
-    // let content = String::from_utf8(output.stdout).ok().unwrap();
-    // print!("{}", content);
 }
 
 fn windows_get_installed_software_regedit() -> Vec<Application> {
@@ -132,32 +119,33 @@ fn windows_get_installed_software_regedit() -> Vec<Application> {
     software
 }
 
-fn windows_get_installed_software_wmi() -> Result<(), Box<dyn std::error::Error>> {
-    let com_con = COMLibrary::new()?;
-    let wmi_con = WMIConnection::new(com_con.into())?;
-
-    println!("execute query: ");
-    let result = block_on(exec_async_query(&wmi_con));
-
-    Ok(())
+#[tauri::command]
+fn get_os_info_command() -> OSInfo {
+    let info = os_info_powershell();
+    println!("os_info: {:#?}", info);
+    info
 }
 
-async fn exec_async_query(wmi_con: &WMIConnection) -> Result<(), Box<dyn std::error::Error>> {
-    println!("async_raw_query: ");
-    let results: Vec<HashMap<String, Variant>> = wmi_con
-        .async_raw_query("SELECT * FROM Win32_OperatingSystem")
-        .await?;
+fn os_info_powershell() -> OSInfo {
+    let ps = PsScriptBuilder::new()
+        .no_profile(true)
+        .non_interactive(true)
+        .hidden(true)
+        .print_commands(false)
+        .build();
 
-    println!("Results: {0}", results.len());
-    for os in results {
-        println!("{:#?}", os);
-    }
+    // let output = ps.run(r#"Get-ComputerInfo | ConvertTo-Json"#).unwrap();
+    // println!("{}", output.stdout().unwrap());
 
-    let results: Vec<Win32_OperatingSystem> = wmi_con.async_query().await?;
+    // Windows Information
+    let windowsOutput = ps
+        .run(r#"Get-ComputerInfo -Property OsName,WindowsVersion,WindowsEditionId,WindowsBuildLabEx,WindowsInstallationType,WindowsCurrentVersion,OSDisplayVersion,OSArchitecture,CsDomain | ConvertTo-Json"#)
+        .unwrap();
+    let windows = windowsOutput.stdout().unwrap();
 
-    for os in results {
-        println!("{:#?}", os);
-    }
+    let windowsInfo: OSInfo = serde_json::from_str(&windows).unwrap();
 
-    Ok(())
+    // Hardware Information
+
+    windowsInfo
 }

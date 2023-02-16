@@ -32,13 +32,13 @@ export function NavBar() {
               <a href="/apps">Applications</a>
             </li>
             <li>
-              <a href="os">OS Updates</a>
+              <a href="/os">OS Updates</a>
             </li>
             <li>
-              <a href="system">System Info</a>
+              <a href="/system">System Info</a>
             </li>
             <li>
-              <a href="about">About</a>
+              <a href="/about">About</a>
             </li>
             <li>
               <a href="error">Error view</a>
