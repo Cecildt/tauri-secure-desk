@@ -2,7 +2,7 @@
 name = "app"
 version = "0.1.0"
 description = "Secure Desk - A Tauri App"
-authors = ["you"]
+authors = ["cecildt"]
 license = ""
 repository = ""
 default-run = "app"
