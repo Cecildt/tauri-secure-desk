@@ -12,6 +12,24 @@ Desktop application to check security aspects like OS (Windows, Linux, MacOS) pa
 * Check for security misconfigurations
 * Check for security best practices
 
+## Developement
+
+Active Development:
+
+```bash
+
+cargo tauri dev
+
+```
+
+Creating a debug build:
+
+```bash
+
+cargo tauri build --debug
+
+```
+
 ## Installation
 
 ### Windows
