@@ -33,8 +33,13 @@ struct OSInfo {
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
-    tauri_build::build();
-    
+    // tauri::Builder::default()
+    //     .plugin(tauri_plugin_fs::init())
+    //     .plugin(tauri_plugin_opener::init())
+    //     .invoke_handler(tauri::generate_handler![greet])
+    //     .run(tauri::generate_context!())
+    //     .expect("error while running tauri application");
+
     // tauri_build::build()
     //     .run(|app| {
     //         app.add_plugin(tauri_plugin_process::init());
@@ -47,17 +52,17 @@ pub fn run() {
     //     })
     //     .expect("error while running tauri application");
 
-    // tauri::Builder::default()
-    //     .plugin(tauri_plugin_process::init())
-    //     .plugin(tauri_plugin_shell::init())
-    //     .plugin(tauri_plugin_dialog::init())
-    //     .invoke_handler(tauri::generate_handler![
-    //         get_software_command,
-    //         get_os_info_command
-    //     ])
-    //     // .invoke_handler(tauri::generate_handler![get_os_info_command])
-    //     .run(tauri::generate_context!())
-    //     .expect("error while running tauri application");
+    tauri::Builder::default()
+        .plugin(tauri_plugin_process::init())
+        .plugin(tauri_plugin_shell::init())
+        .plugin(tauri_plugin_dialog::init())
+        .invoke_handler(tauri::generate_handler![
+            get_software_command,
+            get_os_info_command
+        ])
+        // .invoke_handler(tauri::generate_handler![get_os_info_command])
+        .run(tauri::generate_context!())
+        .expect("error while running tauri application");
 }
 
 #[tauri::command]

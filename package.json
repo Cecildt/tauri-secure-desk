@@ -13,6 +13,8 @@
     "@tauri-apps/api": "2.2.0",
     "@tauri-apps/cli": "^2.2.4",
     "@tauri-apps/plugin-dialog": "^2.2.0",
+    "@tauri-apps/plugin-fs": "^2.2.0",
+    "@tauri-apps/plugin-opener": "^2.2.4",
     "@tauri-apps/plugin-process": "^2.2.0",
     "@tauri-apps/plugin-shell": "^2.2.0",
     "daisyui": "4.12.23",
@@ -34,5 +36,6 @@
     "tailwindcss": "3.4.17",
     "typescript": "5.7.3",
     "vite": "6.0.7"
-  }
+  },
+  "packageManager": "pnpm@8.6.12+sha1.a2f983fbf8f2531dc85db2a5d7f398063d51a6f3"
 }
