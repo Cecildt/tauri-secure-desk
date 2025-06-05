@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { invoke } from "@tauri-apps/api/core";
+import { invoke } from "@tauri-apps/api";
 import { AppsTable } from "./apps-table";
 
-export function ContentTabs(): JSX.Element {
+export function ContentTabs(): React.ReactElement {
   const [state, setState] = useState({
     content: <AppsTable />,
   });
